@@ -3,13 +3,15 @@ import { Response } from 'express';
 import { Profile } from 'passport-spotify';
 import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
 import { AuthService } from './auth.service';
+import { ApiOAuth2, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   private readonly logger = new Logger(AuthController.name);
 
   constructor(private readonly authService: AuthService) {}
-  
+
   @UseGuards(SpotifyOauthGuard)
   @Get('login')
   login(): void {
@@ -35,7 +37,8 @@ export class AuthController {
     } = req;
 
     if (!user) {
-      res.redirect('/');
+      res.redirect('/v1/home');
+      this.logger.debug('No user');
       return;
     }
 
