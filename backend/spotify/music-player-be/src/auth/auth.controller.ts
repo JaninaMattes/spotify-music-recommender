@@ -5,6 +5,10 @@ import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
 import { AuthService } from './auth.service';
 import { ApiOAuth2, ApiTags } from '@nestjs/swagger';
 
+/**
+ * More information regarding Spotify API usage under docs: 
+ * https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
+ */
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -12,13 +16,28 @@ export class AuthController {
 
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(SpotifyOauthGuard)
+  //@UseGuards(SpotifyOauthGuard)
   @Get('login')
-  login(): void {
-    return;
+  async spotifyAuthLogin(
+    @Req() req: any,
+    @Res() res: Response,
+  ): Promise<void> {
+    var state = (Math.random() + 1).toString(16).substring(7);
+    var scope = 'user-read-private user-read-email';
+
+    res.redirect(
+      'https://accounts.spotify.com/authorize?' +
+        JSON.stringify({
+          response_type: 'code',
+          scope: scope,
+          client_id: process.env.SPOTIFY_CLIENT_ID,
+          redirect_url: process.env.CALLBACK_URL,
+          state: state,
+        }),
+    );
   }
 
-  @UseGuards(SpotifyOauthGuard)
+  //@UseGuards(SpotifyOauthGuard)
   @Get('redirect')
   async spotifyAuthRedirect(
     @Req() req: any,
@@ -38,7 +57,6 @@ export class AuthController {
 
     if (!user) {
       res.redirect('/v1/home');
-      this.logger.debug('No user');
       return;
     }
 
