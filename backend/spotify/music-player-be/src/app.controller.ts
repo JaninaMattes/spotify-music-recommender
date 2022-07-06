@@ -1,5 +1,5 @@
 import { Controller, Get, Logger, UseGuards } from '@nestjs/common';
-import { ApiOAuth2, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
@@ -10,10 +10,9 @@ export class AppController {
 
   constructor(private readonly appService: AppService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('home')
   getHello(): string {
     return this.appService.getHello();
   }
-
 }

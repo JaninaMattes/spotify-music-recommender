@@ -3,10 +3,10 @@ import { Response } from 'express';
 import { Profile } from 'passport-spotify';
 import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
 import { AuthService } from './auth.service';
-import { ApiOAuth2, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
 /**
- * More information regarding Spotify API usage under docs: 
+ * More information regarding Spotify API usage under docs:
  * https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
  */
 @ApiTags('auth')
@@ -16,28 +16,25 @@ export class AuthController {
 
   constructor(private readonly authService: AuthService) {}
 
-  //@UseGuards(SpotifyOauthGuard)
+  /**
+   * Endpoint that users access to
+   * initiate the authentification.
+   * @returns {string}
+   */
+  @UseGuards(SpotifyOauthGuard)
   @Get('login')
-  async spotifyAuthLogin(
-    @Req() req: any,
-    @Res() res: Response,
-  ): Promise<void> {
-    var state = (Math.random() + 1).toString(16).substring(7);
-    var scope = 'user-read-private user-read-email';
-
-    res.redirect(
-      'https://accounts.spotify.com/authorize?' +
-        JSON.stringify({
-          response_type: 'code',
-          scope: scope,
-          client_id: process.env.SPOTIFY_CLIENT_ID,
-          redirect_url: process.env.CALLBACK_URL,
-          state: state,
-        }),
-    );
+  spotifyAuthLogin(): void {
+    return;
   }
 
-  //@UseGuards(SpotifyOauthGuard)
+  /**
+   * Endpoint the user gets redirected to
+   * once successfully logged in.
+   * @param req
+   * @param res
+   * @returns
+   */
+  @UseGuards(SpotifyOauthGuard)
   @Get('redirect')
   async spotifyAuthRedirect(
     @Req() req: any,
@@ -56,6 +53,8 @@ export class AuthController {
     } = req;
 
     if (!user) {
+      // unsuccessful authentification
+      // redirect to login page
       res.redirect('/v1/home');
       return;
     }
@@ -66,6 +65,7 @@ export class AuthController {
 
     res.set('authorization', `Bearer ${jwt}`);
 
+    // returns user info and spotify token
     return res.status(201).json({ authInfo, user });
   }
 }

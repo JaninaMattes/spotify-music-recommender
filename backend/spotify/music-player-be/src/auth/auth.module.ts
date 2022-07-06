@@ -25,5 +25,4 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   providers: [AuthService, JwtStrategy, SpotifyOauthStrategy],
   controllers: [AuthController],
 })
-
 export class AuthModule {}
