@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { RouterModule } from '@nestjs/core';
 import { GeneratedMusicModule } from './generated-music/generated-music.module';
 import { HelloWorldModule } from './hello-world/hello-world.module';

@@ -17,7 +17,7 @@ export class SpotifyMusicController {
     return this.spotifyMusicService.findAll();
   }
 
-  @Get(':id')
+  @Get(':id') 
   findOne(@Param('id') id: string) {
     return this.spotifyMusicService.findOne(+id);
   }
