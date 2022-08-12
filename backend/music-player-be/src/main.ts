@@ -1,18 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const config = new DocumentBuilder().setTitle('Music Recommender Application')
-                      .setDescription("Music Recommender API Application")
-                      .setVersion('v1')
-                      .addTag('music')
-                      .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  const config = new DocumentBuilder()
+  .setTitle('Spotify Music Player')
+  .setDescription('The Spotify Music Player description')
+  .setVersion('1.0')
+  .addTag('music')
+  .build();
+const document = SwaggerModule.createDocument(app, config);
+SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }
