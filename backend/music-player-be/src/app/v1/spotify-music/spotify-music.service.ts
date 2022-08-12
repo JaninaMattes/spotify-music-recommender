@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSpotifyMusicDto } from './dto/create-spotify-music.dto';
-import { UpdateSpotifyMusicDto } from './dto/update-spotify-music.dto';
+import { SpotifyService } from 'src/libs/spotify/spotify-api.service';
 
 @Injectable()
 export class SpotifyMusicService {
-  create(createSpotifyMusicDto: CreateSpotifyMusicDto) {
-    return 'This action adds a new spotifyMusic';
-  }
+  constructor(private readonly spotifyService: SpotifyService) {}
 
   findAll() {
-    return `This action returns all spotifyMusic`;
+    throw new Error('Method not implemented.');
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} spotifyMusic`;
-  }
-
-  update(id: number, updateSpotifyMusicDto: UpdateSpotifyMusicDto) {
-    return `This action updates a #${id} spotifyMusic`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} spotifyMusic`;
+  public async getFavoriteItems(
+    type: string,
+    limit: number,
+    offset: number,
+    timeRange: string,
+    accessToken: string,
+  ): Promise<any> {
+    const result = await this.spotifyService.getFavoriteItems(
+      type,
+      limit,
+      offset,
+      timeRange,
+      accessToken,
+    );
+    return result;
   }
 }
