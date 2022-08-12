@@ -1,19 +1,34 @@
-import { Controller, Get, Logger, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { HelloWorldService } from './hello-world.service';
+import { CreateHelloWorldDto } from './dto/create-hello-world.dto';
+import { UpdateHelloWorldDto } from './dto/update-hello-world.dto';
 
-@ApiTags('hello-world')
-@UseGuards(JwtAuthGuard)
 @Controller('hello-world')
 export class HelloWorldController {
-  private readonly logger = new Logger(HelloWorldController.name);
   constructor(private readonly helloWorldService: HelloWorldService) {}
 
-  @ApiOperation({ summary: 'Say hello to the world.', tags: ['Hello World'] })
-  @ApiResponse({ type: String })
+  @Post()
+  create(@Body() createHelloWorldDto: CreateHelloWorldDto) {
+    return this.helloWorldService.create(createHelloWorldDto);
+  }
+
   @Get()
-  getHello(): string {
-    return this.helloWorldService.getHello();
+  findAll() {
+    return this.helloWorldService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.helloWorldService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateHelloWorldDto: UpdateHelloWorldDto) {
+    return this.helloWorldService.update(+id, updateHelloWorldDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.helloWorldService.remove(+id);
   }
 }
