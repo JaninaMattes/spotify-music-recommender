@@ -31,7 +31,8 @@ export class SpotifyMusicController {
     @Query('offset') offset: number,
     @Query('timeRange') timeRange: string,
   ): Promise<ISpotifyItem[]> | undefined {
-    const accessToken = '';  
+    const accessToken = 'BQAxQkzaisoiXkwTBqxaB4gAYIk9e5b71Qf0RQu9vbHjJBaGQyGOZfm_IgHPw9oPkXHo2JxU6hiEYQolGEcaMvjRkdcTzVoPLlolGAoPlZ-n2gAUTD4KU1buyKSsYHUbbdwB3ewKm6leHT0DGKIgrYnetPAFEdKWH2rASPNwcU36vVV2P1ZU9YlSXiNVi0rVJixMcgRmcg';
+
     return this.spotifyMusicService.getMyTopItems(
       type,
       limit,
