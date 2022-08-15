@@ -1,26 +1,43 @@
 import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { SpotifyMusicService } from './spotify-music.service';
-import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
-import { access } from 'fs';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
+import { JWTAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
+import { ISpotifyItem } from 'src/libs/types';
 
 @ApiTags('spotify-music')
-@UseGuards(JwtAuthGuard)
+@ApiBearerAuth('access-token')
+// @UseGuards(JWTAuthGuard)
 @Controller('spotify-music')
 export class SpotifyMusicController {
   constructor(private readonly spotifyMusicService: SpotifyMusicService) {}
 
-  @ApiOperation({ summary: 'Get the main favorite songs.', tags: ['Spotify Music'] })
-  @Get()
-  findAll() {
-    return this.spotifyMusicService.findAll();
-  }
-
-  @ApiOperation({ summary: 'Get single favorite song by id.', tags: ['Spotify Music'] })
-  @ApiParam({ name: 'id', description: 'The identifier of a specific song' })
+  @ApiOperation({
+    summary: 'Get favorite songs/artistd by type.',
+    tags: ['Spotify Music'],
+  })
+  @ApiParam({
+    name: 'type',
+    description: 'The type of information artists/music',
+  })
   @Get(':type')
-  getFavoriteItems(@Param('type') type: string, @Query('limit') limit: number, @Query('offset') offset: number, @Query('timeRange') timeRange: string){
-    return this.spotifyMusicService.getFavoriteItems(type, limit, offset, timeRange, accessToken);
+  getFavoriteItems(
+    @Param('type') type: string,
+    @Query('limit') limit: number,
+    @Query('offset') offset: number,
+    @Query('timeRange') timeRange: string,
+  ): Promise<ISpotifyItem[]> | undefined {
+    const accessToken = '';  
+    return this.spotifyMusicService.getMyTopItems(
+      type,
+      limit,
+      offset,
+      timeRange,
+      accessToken,
+    );
   }
-
 }
