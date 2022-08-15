@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 @Expose()
 export class ArtistDto {
@@ -19,5 +19,20 @@ export class ArtistDto {
   @IsNotEmpty()
   @IsString()
   type: string[];
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  external_urls: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  uri: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  href: string;
 
 }
