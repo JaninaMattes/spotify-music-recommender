@@ -1,10 +1,11 @@
 import { Controller, Get, Logger, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JWTAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
 import { HelloWorldService } from './hello-world.service';
 
 @ApiTags('hello-world')
-@UseGuards(JwtAuthGuard)
+@ApiBearerAuth('access-token')
+@UseGuards(JWTAuthGuard)
 @Controller('hello-world')
 export class HelloWorldController {
   private readonly logger = new Logger(HelloWorldController.name);

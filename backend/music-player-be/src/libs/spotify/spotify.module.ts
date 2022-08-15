@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 import { SpotifyService } from './spotify-api.service';
 
 const services = [
@@ -6,6 +7,7 @@ const services = [
 ];
 
 @Module({
+    imports: [HttpModule],
     providers: services,
     exports: services
 })
