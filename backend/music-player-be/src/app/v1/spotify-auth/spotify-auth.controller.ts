@@ -13,6 +13,7 @@ import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
  * https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
  */
 @ApiTags('spotify-auth')
+@UseGuards(SpotifyOauthGuard)
 @Controller('spotify-auth')
 export class SpotifyAuthController {
   private readonly logger = new Logger(SpotifyAuthController.name);
@@ -23,7 +24,6 @@ export class SpotifyAuthController {
    * initiate the OAuth2 authentification code flow.
    * @returns
    */
-  @UseGuards(SpotifyOauthGuard)
   @Get('/login')
   spotifyAuthLogin(): void {
     this.logger.debug('Login via Spotify API');
@@ -36,7 +36,6 @@ export class SpotifyAuthController {
    * @param res
    * @returns
    */
-  @UseGuards(SpotifyOauthGuard)
   @Get('/callback')
   async spotifyAuthRedirect(
     @Req() req: any,
