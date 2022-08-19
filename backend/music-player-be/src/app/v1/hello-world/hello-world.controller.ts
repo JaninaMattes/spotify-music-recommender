@@ -1,6 +1,8 @@
-import { Controller, Get, Logger, UseGuards } from '@nestjs/common';
+import { Controller, Get, Logger, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AccessTokenClaims, Claims } from '../spotify-auth/decorator/access-token-claims.decorator';
 import { JWTAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
+import { HelloWorldDto } from './dto/hello-world.dto';
 import { HelloWorldService } from './hello-world.service';
 
 @ApiTags('hello-world')
@@ -12,9 +14,11 @@ export class HelloWorldController {
   constructor(private readonly helloWorldService: HelloWorldService) {}
 
   @ApiOperation({ summary: 'Say hello to the world.', tags: ['Hello World'] })
-  @ApiResponse({ type: String })
+  @ApiResponse({ type: HelloWorldDto })
   @Get()
-  getHello(): string {
-    return this.helloWorldService.getHello();
+  public async getHello(@Query('name') name: string, @AccessTokenClaims() claims: Claims): Promise<HelloWorldDto> {
+    this.logger.debug(`Received access token claims="${JSON.stringify(claims)}".`);
+    const message = await this.helloWorldService.sayHello(name);
+    return Promise.resolve({ message });
   }
 }

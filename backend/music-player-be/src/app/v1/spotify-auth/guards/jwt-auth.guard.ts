@@ -1,14 +1,14 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserDto } from '../../users/dto/user.dto';
+import { Claims } from '../decorator/access-token-claims.decorator';
 
 @Injectable()
 export class JWTAuthGuard extends AuthGuard('jwt') {
     private readonly logger = new Logger(JWTAuthGuard.name);
 
-    handleRequest<TUser = UserDto>(err: any, user: any, info: any, context: any, status?: any): TUser {
+    handleRequest<TUser = Claims>(err: any, user: any, info: any, context: any, status?: any): TUser {
         try {
-            const result = super.handleRequest<UserDto>(err, user, info, context, status);
+            const result = super.handleRequest<Claims>(err, user, info, context, status);
             this.logger.debug(`User was successfully authenticated.`);
             return result as unknown as TUser;
         } catch (error) {
