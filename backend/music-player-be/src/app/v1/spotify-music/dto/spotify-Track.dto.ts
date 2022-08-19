@@ -5,7 +5,6 @@ import { ISpotifyItem } from 'src/libs/types';
 import { ArtistDto } from './artists.dto';
 import { SpotifyImageDto } from './spotify-music-image.dto';
 
-
 @Expose()
 export class SpotifyTrackDto implements ISpotifyItem{
 
