@@ -60,8 +60,8 @@ export class SpotifyAuthController {
       res.redirect('/');
       return;
     }
-
     this.logger.debug('User successfully authenticated via Spotify API');
+    this.spotifyAuthService.create(user, authInfo);
 
     req.user = undefined;
 

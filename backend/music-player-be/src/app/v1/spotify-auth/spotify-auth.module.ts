@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { SpotifyOauthStrategy } from './strategies/spotify-oauth.strategy';
 import { SpotifyModule } from 'src/libs/spotify/spotify.module';
+import { UsersModule } from '../users/users.module';
 
 const imports = [
   PassportModule,
@@ -21,6 +22,7 @@ const imports = [
     },
     inject: [ConfigService],
   }),
+  UsersModule,
   SpotifyModule
 ];
 

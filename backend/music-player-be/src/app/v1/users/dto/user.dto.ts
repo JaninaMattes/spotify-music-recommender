@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsString } from 'class-validator';
+import { IUser } from 'src/libs/types';
 
 @Expose()
-export class UserDto {
+export class UserDto implements IUser{
 
     @ApiProperty()
     @IsNotEmpty()
@@ -24,15 +25,5 @@ export class UserDto {
     @IsNotEmpty()
     @IsString()
     profileUrl: string;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    photos: string[];
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    country: string;
 
 }

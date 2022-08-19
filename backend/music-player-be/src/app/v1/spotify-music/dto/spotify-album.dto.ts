@@ -5,7 +5,7 @@ import { ISpotifyItem } from 'src/libs/types';
 import { SpotifyImageDto } from './spotify-music-image.dto';
 
 @Expose()
-export class SpotifyAlbumDto implements ISpotifyItem{
+export class SpotifyAlbumDto implements ISpotifyItem {
 
   @ApiProperty()
   @IsNotEmpty()

@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: 'mongo'
+    container_name: 'spotify-mongodb'
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db/mongo-volume:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=spotify-mongodb
+      - MONGO_INITDB_ROOT_USERNAME=spotify-root
+      - MONGO_INITDB_ROOT_PASSWORD=spotify-pwd
