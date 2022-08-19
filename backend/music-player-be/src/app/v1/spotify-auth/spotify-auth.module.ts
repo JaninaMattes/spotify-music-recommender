@@ -21,14 +21,15 @@ const imports = [
     },
     inject: [ConfigService],
   }),
-  SpotifyModule,
+  SpotifyModule
 ];
 
+const controllers = [SpotifyAuthController];
 const providers = [SpotifyAuthService, JwtStrategy, SpotifyOauthStrategy];
 
 @Module({
   imports: imports,
-  controllers: [SpotifyAuthController],
+  controllers: controllers,
   providers: providers,
 })
 export class SpotifyAuthModule {}
