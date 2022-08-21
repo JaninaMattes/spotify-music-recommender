@@ -1,17 +1,20 @@
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from "@nestjs/config";
+import * as config from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { V1Module } from './v1/v1.module';
 
 const imports = [
-  ConfigModule.forRoot({
+  config.ConfigModule.forRoot({
     envFilePath: ['.env.dev'],
-    isGlobal: true
+    isGlobal: true,
   }),
-  MongooseModule.forRoot('mongodb://spotify-root:spotify-pwd@localhost:27017/spotify-mongodb'),
+  MongooseModule.forRoot(
+    // connection string uri
+    'mongodb://spotify-root:spotify-pwd@localhost:27017/spotify-mongodb',
+  ),
   HttpModule,
-  V1Module
+  V1Module,
 ];
 
 @Module({

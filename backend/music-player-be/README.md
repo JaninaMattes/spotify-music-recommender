@@ -45,6 +45,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Hot Reload
+
+The highest impact on your application's bootstrapping process is TypeScript compilation. Fortunately, with webpack HMR (Hot-Module Replacement), we don't need to recompile the entire project each time a change occurs. 
+
+The Nest CLI wraps webpack, which allows use of the HotModuleReplacementPlugin.
+
+
+
 ## Test
 
 ```bash
