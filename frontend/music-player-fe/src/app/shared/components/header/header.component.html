@@ -1,0 +1,23 @@
+<div class="header-wrapper">
+    <div>
+        <div class="logo-img">
+            <img [src]="'assets/images/logo/dark-logo.png'">
+        </div>
+        <div class="app-name">My Music Player</div>
+    </div>
+    <!--Change language menu-->
+    <div class="nav-icon" [matMenuTriggerFor]="languageSettingsMenu"><span class="icon-Language"></span></div>
+    <mat-menu #languageSettingsMenu="matMenu">
+        <button mat-menu-item (click)="changeLang('en')">English</button>
+        <button mat-menu-item (click)="changeLang('de')">Deutsch</button>
+    </mat-menu>
+    <!--Change color theme menu-->
+    <div class="nav-icon" [matMenuTriggerFor]="colorSettingsMenu"><span class="icon-Settings"></span></div>
+    <mat-menu #colorSettingsMenu="matMenu">
+        <button mat-menu-item (click)="colorThemeMenu">Theme</button>
+    </mat-menu>
+    <mat-menu #colorThemeMenu="matMenu">
+        <button mat-menu-item (click)="setColorTheme('light')">Light</button>
+        <button mat-menu-item (click)="setColorTheme('dark')">Dark</button>
+    </mat-menu>
+</div>
