@@ -28,12 +28,14 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.sass"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/prod",
               "budgets": [
                 {
                   "type": "initial",
@@ -55,6 +57,29 @@
               "outputHashing": "all"
             },
             "development": {
+              "outputPath": "dist/dev",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "local": {
+              "outputPath": "dist/local",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -73,6 +98,9 @@
             },
             "development": {
               "browserTarget": "music-player-fe:build:development"
+            },
+            "local": {
+              "browserTarget": "music-player-fe:build:local"
             }
           },
           "defaultConfiguration": "development"
@@ -100,8 +128,20 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "86e185e7-f7df-47a6-9cde-5634aea706e3"
   }
 }
