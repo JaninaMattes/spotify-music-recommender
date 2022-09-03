@@ -5,14 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { CardsComponent } from './cards/cards.component';
+import { HomeComponent } from './home/home.component';
 
 export function createTranslationLoader(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
 const modules = [
@@ -22,7 +23,7 @@ const modules = [
   SharedModule,
   LoggerModule.forRoot({
     level: NgxLoggerLevel.TRACE, // remove later just for debugging
-    disableConsoleLogging: false,
+    disableConsoleLogging: false
   }),
   TranslateModule.forRoot({
     defaultLanguage: 'en',
@@ -38,6 +39,8 @@ const modules = [
 @NgModule({
   declarations: [
     AppComponent,
+    CardsComponent,
+    HomeComponent
   ],
   imports: modules,
   providers: [],

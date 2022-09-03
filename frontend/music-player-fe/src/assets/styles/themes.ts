@@ -9,7 +9,8 @@ export const lightTheme: ITheme = {
     textColorSeconday: "#D5EAEA",
     highlightColor: "#25E9D9",
     actionColor: "#F06b78",
-    warningColor: "#E6295B"
+    warningColor: "#E6295B",
+    bgHoverColor: "#192036"
 }
 
 export const darkTheme: ITheme = {
@@ -21,5 +22,6 @@ export const darkTheme: ITheme = {
     textColorSeconday: "#20435E",
     highlightColor: "#25E9D9",
     actionColor: "#F06b78",
-    warningColor: "#B32047"
+    warningColor: "#B32047",
+    bgHoverColor: "#C5EDFF"
 }

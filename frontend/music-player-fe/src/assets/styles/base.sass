@@ -2,38 +2,32 @@ h1
     font-family: 'Roboto Flex', sans-serif 
     font-size: 40px 
     line-height: 48px 
-  
 
 h2  
     font-family: 'Roboto Flex', sans-serif 
     font-size: 32px 
     line-height: 40px 
-  
 
 h3  
     font-family: 'Roboto Flex', sans-serif 
     font-size: 28px 
     line-height: 38px 
   
-
 h4  
     font-family: 'Roboto Flex', sans-serif 
     font-size: 26px 
     line-height: 34px 
   
-
 h5  
     font-family: 'Roboto Flex', sans-serif 
     font-size: 22px 
     line-height: 30px 
   
-
 h6  
     font-family: 'Roboto Flex', sans-serif 
     font-size: 20px 
     line-height: 28px 
   
-
 a  
     text-decoration: none 
     color: var(--actionColor) 
@@ -44,12 +38,10 @@ a
         text-decoration: underline 
       
     
-    &.disabled  
+    &:disabled  
         color: var(--actionDisabledColor) 
         pointer-events: none 
       
-  
-
 .btn  
     height: 44px 
     min-width: 44px 
@@ -62,11 +54,9 @@ a
     outline: none 
     font-family: 'Roboto Flex', sans-serif 
 
-    &.disabled  
+    &:disabled  
         pointer-events: none 
       
-  
-
 .btn-primary  
     background-color: var(--actionColor) 
     color: var(--bgColorPrimary) 
@@ -74,13 +64,9 @@ a
     &:hover  
         background-color: var(--actionHoverColor) 
       
-
-    &.disabled,
     &:disabled  
         background-color: var(--actionDisabledColor) 
       
-  
-
 .btn-secondary  
     background-color: transparent 
     color: var(--actionColor) 
@@ -88,25 +74,32 @@ a
 
     &:hover  
         background-color: var(--actionHoverColor) 
-      
-
-    &.disabled,
+    
     &:disabled  
         background-color: var(--actionDisabledColor) 
         color: var(--actionDisabledColor) 
       
-  
-
 .btn-warning  
     background-color: var(--warningColor) 
     color: var(--bgColorPrimary) 
 
     &:hover  
         background-color: var(--warningColor) 
-        border-color: var(--warningColor) 
-      
+        border-color: var(--warningColor)
 
-    &.disabled,
     &:disabled  
         background-color: var(--warningColor) 
         color: var(--actionDisabledColor) 
+
+.mat-menu-item
+    background: var(--bgColorSecondary)
+    color: var(--textColorPrimary)
+    font-size: 14px
+
+    &:hover
+        background: var(--bgHoverColor)
+        
+.nav-icon
+    font-size: 24px
+    cursor: pointer
+    margin-left: 15px

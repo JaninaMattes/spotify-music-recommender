@@ -10,17 +10,18 @@ import { ColorThemeService } from '../../services/themes.service';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private translate: TranslateService, 
+    private translateService: TranslateService, 
     private colorThemeService: ColorThemeService
   ) { }
 
   ngOnInit(): void {
     const colorTheme: 'light' | 'dark' = JSON.parse(localStorage.getItem('colorTheme') as string);
+    console.log("Color schema: ", colorTheme)
     this.setColorTheme(colorTheme? colorTheme: 'dark');
   }
 
   changeLang(langCode: string): void {
-    this.translate.use(langCode);
+    this.translateService.use(langCode);
   }
 
   setColorTheme(mode: 'light' | 'dark'): void {
