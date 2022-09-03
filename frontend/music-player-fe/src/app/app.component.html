@@ -1,12 +1,14 @@
-<app-header></app-header>
-<!-- start: main content-->
 <div>
-  <div class="navbar">
-    <app-navbar></app-navbar>
+  <app-header></app-header>
+  <!-- start: main content-->
+  <div class="master-detail">
+    <div class="master-detail__navbar-wrapper">
+      <app-navbar></app-navbar>
+    </div>
+    <div class="master-detail__content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <div class="content-wrapper">
-    <router-outlet></router-outlet>
-  </div>
+  <!--end: main content-->
+  <app-footer></app-footer>
 </div>
-<!--end: main content-->
-<app-footer></app-footer>

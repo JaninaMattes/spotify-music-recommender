@@ -8,4 +8,5 @@ export interface ITheme {
     highlightColor: string,
     actionColor: string,
     warningColor: string,
+    bgHoverColor: string
 }

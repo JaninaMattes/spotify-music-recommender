@@ -3,6 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    "module": "es2020",
     "types": [
       "jasmine"
     ]
@@ -12,6 +13,7 @@
     "src/polyfills.ts"
   ],
   "include": [
+    "src/**/*.e2e-spec.ts",
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
   ]
