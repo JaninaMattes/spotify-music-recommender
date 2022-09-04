@@ -1,4 +1,5 @@
 import { FormsModule, NgModel } from "@angular/forms";
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from "@angular/material/menu";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -28,6 +29,7 @@ const components = [
 
 const modules = [
     CommonModule,
+    MatIconModule,
     MatMenuModule,
     FormsModule,
     MatFormFieldModule,
