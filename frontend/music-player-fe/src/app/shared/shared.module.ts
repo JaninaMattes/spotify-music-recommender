@@ -19,10 +19,12 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { NavbarComponent } from "./components/navbar/navbar.component";
 
 const components = [
     HeaderComponent,
     FooterComponent,
+    NavbarComponent,
     SnackbarComponent,
     UserComponent
 ];

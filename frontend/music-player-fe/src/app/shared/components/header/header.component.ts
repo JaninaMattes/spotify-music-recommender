@@ -16,12 +16,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     const colorTheme: 'light' | 'dark' = JSON.parse(localStorage.getItem('colorTheme') as string);
-    console.log("Color schema: ", colorTheme)
     this.setColorTheme(colorTheme? colorTheme: 'dark');
   }
 
   changeLang(langCode: string): void {
-    this.translateService.use(langCode);
+    console.log('Changed language to:', langCode);
   }
 
   setColorTheme(mode: 'light' | 'dark'): void {

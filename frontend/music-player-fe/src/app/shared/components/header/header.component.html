@@ -13,13 +13,13 @@
             <!-- <div class="nav-icon"><span class="icon-User"></span></div> -->
             <div class="nav-icon"><mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="account_circle"></mat-icon></div>
             <!--Change language menu-->
-            <div class="nav-icon" [matMenuTriggerFor]="languageSettingsMenu"><mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="language"></mat-icon></div>
+            <div class="nav-icon" [matMenuTriggerFor]="languageSettingsMenu"><mat-icon aria-hidden="false" aria-label="Language icon" fontIcon="language"></mat-icon></div>
             <mat-menu #languageSettingsMenu="matMenu">
                 <button mat-menu-item (click)="changeLang('en')">English</button>
                 <button mat-menu-item (click)="changeLang('de')">Deutsch</button>
             </mat-menu>
             <!--Change color theme menu-->
-            <div class="nav-icon" [matMenuTriggerFor]="colorSettingsMenu"><mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="settings"></mat-icon></div>
+            <div class="nav-icon" [matMenuTriggerFor]="colorSettingsMenu"><mat-icon aria-hidden="false" aria-label="Settings icon" fontIcon="settings"></mat-icon></div>
             <mat-menu #colorSettingsMenu="matMenu">
                 <button mat-menu-item (click)="colorThemeMenu">Theme</button>
             </mat-menu>
