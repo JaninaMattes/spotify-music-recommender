@@ -3,7 +3,7 @@ import { Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 import { v4 as uuid } from 'uuid';
 import { NGXLogger } from "ngx-logger";
-import { BehaviorSubject, filter, Observable } from "rxjs";
+import { BehaviorSubject, filter, Observable, of, switchMap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { ISpotifyResult, SpotifyAuthUser } from "../../models/spotify-auth-user.model";
 import { SpotifyUserService } from "./spotify-user.services";
@@ -28,7 +28,7 @@ export class SpotifyAuthService {
     private get spotifyUser(): any {
         const user = localStorage.getItem(ID_TOKEN_KEY);
         if (user) {
-            return this.decodeToken(user) as SpotifyAuthUser;
+            return this.decodeToken<SpotifyAuthUser>(user);
         }
         return null;
     }
@@ -43,7 +43,7 @@ export class SpotifyAuthService {
         private userService: SpotifyUserService
     ){}
 
-    public login(redirectTo: string): Observable<ISpotifyResult> {
+    public login(redirectTo: string): void {
         const nonceValue = {
             requestId: uuid().replace('-', ''),
             redirectTo
@@ -52,7 +52,14 @@ export class SpotifyAuthService {
         this.addEncodedTokenToStorage('login_info', encodedValue);
 
         const url = `${environment.testApiUrl}/spotify-auth/login`;
-        return this.httpClient.get(url) as Observable<ISpotifyResult>;
+        const authObs$ = this.httpClient.get(url) as Observable<ISpotifyResult>;
+        authObs$.pipe(
+            switchMap( res => {
+                this.handleLoginCallback(res);
+                return of(null);
+            })
+        ).subscribe();
+
     }
 
     public logOff(): void {
@@ -66,16 +73,26 @@ export class SpotifyAuthService {
 
     public handleLoginCallback(resp: ISpotifyResult): void {
         const storedNonce = localStorage.getItem('login_info');
+        if (storedNonce) {
+            this.addEncodedTokenToStorage(ID_TOKEN_KEY, resp.user);
+            this.addEncodedTokenToStorage(ACCESS_TOKEN_KEY, resp.authInfo);
+        }
         // TODO: Add later
         // if(!storedNonce) {
         //     return this.logOff();
         // } else if (storedNonce !== resp.nonce) {
         //     return this.logOff();
         // } 
-        const decodedNonce = this.decodeToken(storedNonce);
-        const redirectPath = decodedNonce.redirectTo ?? '/';
-        this.addEncodedTokenToStorage(resp.expires_at, resp);
-        void this.router.navigate([redirectPath])
+        // else {
+        //     const decodedNonce = this.decodeToken(storedNonce);
+        //     const redirectPath = decodedNonce.redirectTo ?? '/';
+        //     this.addEncodedTokenToStorage(resp.expires_at, resp);
+        //     void this.router.navigate([redirectPath])
+        // }
+        const userToken = localStorage.getItem(ID_TOKEN_KEY);
+        if (userToken) {
+            this.authUserSubject.next(this.decodeToken<SpotifyAuthUser>(userToken));
+        }
     }
 
     public addLoggedInUser(): void {
@@ -83,12 +100,9 @@ export class SpotifyAuthService {
         this.userService.loggedInUser.next(this.spotifyUser);
     }
 
-    private decodeToken(encodedValue: string | null): any {
-        if (encodedValue) {
-            const decodedJsonStr = Buffer.from(encodedValue, "base64").toString();
-            return JSON.parse(decodedJsonStr);
-        } 
-        return null;
+    private decodeToken<T>(encodedValue: string): T {
+        const decodedJsonStr = Buffer.from(encodedValue, "base64").toString();
+        return JSON.parse(decodedJsonStr);
     }
 
     private encodeToken(obj: any): string {
@@ -112,7 +126,7 @@ export class SpotifyAuthService {
             console.log('No access-token found.')
             return false;
         }
-        const decodedToken = this.decodeToken(token) as SpotifyAuthUser;
+        const decodedToken = this.decodeToken<SpotifyAuthUser>(token);
         if (decodedToken[EXP_FIELD] < now) {
             this.removeTokenFromStorage();
         }
