@@ -58,7 +58,7 @@ export class SpotifyAuthService {
                 this.handleLoginCallback(res);
                 return of(null);
             })
-        ).subscribe();
+        ).subscribe({ error: err => console.log('Error handling login callback', err) });
 
     }
 

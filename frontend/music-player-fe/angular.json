@@ -97,10 +97,12 @@
               "browserTarget": "music-player-fe:build:production"
             },
             "development": {
-              "browserTarget": "music-player-fe:build:development"
+              "browserTarget": "music-player-fe:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "local": {
-              "browserTarget": "music-player-fe:build:local"
+              "browserTarget": "music-player-fe:build:local",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
