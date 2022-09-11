@@ -12,7 +12,7 @@ export class SpotifyService {
     limit: number,
     offset: number,
     timeRange: string,
-    accessToken: string // TODO: Paas token 
+    accessToken: string // TODO: Pass token + create DTO for return type
   ): Promise<any> | undefined {
     const url = process.env.SPOTIFY_BASE_URL + `/me/top/${type}`;
     const params = {
