@@ -14,7 +14,7 @@ import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
  */
 @ApiTags('spotify-auth')
 @UseGuards(SpotifyOauthGuard)
-@Controller('spotify-auth')
+@Controller('v1/spotify-auth')
 export class SpotifyAuthController {
   private readonly logger = new Logger(SpotifyAuthController.name);
   constructor(private readonly spotifyAuthService: SpotifyAuthService) {}
@@ -26,7 +26,7 @@ export class SpotifyAuthController {
    */
   @Get('/login')
   spotifyAuthLogin(): void {
-    this.logger.debug('Login via Spotify API');
+    return;
   }
 
   /**
@@ -67,7 +67,8 @@ export class SpotifyAuthController {
 
     const jwt = this.spotifyAuthService.login(user);
 
-    res.set('authorization', `Bearer ${jwt}`);
+    res.set('Authorization', `Bearer ${jwt}`);
+    res.set('Access-Control-Allow-Origin', '*')
 
     // returns user info and signed jwt token
     return res.status(201).json({ authInfo, user });

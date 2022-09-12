@@ -8,7 +8,7 @@ import { JWTAuthGuard } from '../spotify-auth/guards/jwt-auth.guard';
 @ApiTags('users')
 @ApiBearerAuth("access-token")
 @UseGuards(JWTAuthGuard)
-@Controller('users')
+@Controller('v1/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

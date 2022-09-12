@@ -42,6 +42,10 @@
  *
  */
 
+ import { Buffer } from 'buffer';
+ // @ts-ignore
+window.Buffer = Buffer;
+
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */

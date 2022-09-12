@@ -12,7 +12,7 @@ import { ISpotifyItem } from 'src/libs/types';
 @ApiTags('spotify-music')
 @ApiBearerAuth('access-token')
 // @UseGuards(JWTAuthGuard)
-@Controller('spotify-music')
+@Controller('v1/spotify-music')
 export class SpotifyMusicController {
   constructor(private readonly spotifyMusicService: SpotifyMusicService) {}
 
@@ -22,7 +22,7 @@ export class SpotifyMusicController {
   })
   @ApiParam({
     name: 'type',
-    description: 'The type of information artists/music',
+    description: 'The type of information, either artists/music',
   })
   @Get(':type')
   getFavoriteItems(

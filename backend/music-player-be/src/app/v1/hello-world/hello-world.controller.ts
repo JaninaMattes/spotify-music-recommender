@@ -8,7 +8,7 @@ import { HelloWorldService } from './hello-world.service';
 @ApiTags('hello-world')
 @ApiBearerAuth('access-token')
 @UseGuards(JWTAuthGuard)
-@Controller('hello-world')
+@Controller('v1/hello-world')
 export class HelloWorldController {
   private readonly logger = new Logger(HelloWorldController.name);
   constructor(private readonly helloWorldService: HelloWorldService) {}

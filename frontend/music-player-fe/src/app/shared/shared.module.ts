@@ -1,4 +1,5 @@
 import { FormsModule, NgModel } from "@angular/forms";
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from "@angular/material/menu";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -18,16 +19,19 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { NavbarComponent } from "./components/navbar/navbar.component";
 
 const components = [
     HeaderComponent,
     FooterComponent,
+    NavbarComponent,
     SnackbarComponent,
     UserComponent
 ];
 
 const modules = [
     CommonModule,
+    MatIconModule,
     MatMenuModule,
     FormsModule,
     MatFormFieldModule,
