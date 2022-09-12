@@ -67,8 +67,8 @@ export class SpotifyAuthController {
 
     const jwt = this.spotifyAuthService.login(user);
 
-    res.set('Authorization', `Bearer ${jwt}`);
     res.set('Access-Control-Allow-Origin', '*')
+    res.set('Authorization', `Bearer ${jwt}`);
 
     // returns user info and signed jwt token
     return res.status(201).json({ authInfo, user });
