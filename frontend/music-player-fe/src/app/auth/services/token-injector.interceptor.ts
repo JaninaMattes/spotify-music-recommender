@@ -35,7 +35,7 @@ export class AccessTokenInjector implements HttpInterceptor {
 
     /**
      * Check if network request is 
-     * sent to a valid API URL.
+     * sent to a valid API URL.s
      * @param request 
      * @returns 
      */

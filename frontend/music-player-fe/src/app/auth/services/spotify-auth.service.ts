@@ -52,7 +52,8 @@ export class SpotifyAuthService {
         this.addEncodedTokenToStorage('login_info', encodedValue);
 
         const url = `${environment.testApiUrl}/spotify-auth/login`;
-        const authObs$ = this.httpClient.get(url) as Observable<ISpotifyResult>;
+        const header = { 'Access-Control-Allow-Origin': '*' };
+        const authObs$ = this.httpClient.get(url, { headers: header }) as Observable<ISpotifyResult>;
         authObs$.pipe(
             switchMap( res => {
                 this.handleLoginCallback(res);
