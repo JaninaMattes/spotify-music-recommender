@@ -56,7 +56,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project: In progress ...</a>
+      <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -80,7 +80,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Project: In progress ...
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
