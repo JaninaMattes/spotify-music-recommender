@@ -32,7 +32,7 @@
     "@nestjs/schematics": "^8.0.8",
     "@nestjs/swagger": "^5.2.1",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.2",
+    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "passport": "^0.6.0",
